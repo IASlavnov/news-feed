@@ -1,0 +1,269 @@
+.page {
+  background-color: white;
+  width: 100%;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.button {
+  height: 40px;
+  color: white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px 25px;
+  background: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.button:before {
+  height: 0%;
+  width: 2px;
+}
+.button:hover {
+  background: yellow;
+  color: black;
+  box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+.button:active {
+  opacity: 0.6;
+}
+
+.button-control {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-control:hover {
+  color: yellow;
+}
+
+.button-control:active {
+  color: black;
+  opacity: 0.6;
+}
+
+.button-up {
+  position: fixed;
+  top: 345px;
+}
+
+.button-up:hover {
+  color: black;
+  opacity: 0.6;
+}
+
+.page-header {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  font-weight: 700;
+  font-size: 20px;
+  z-index: 1;
+  box-shadow: 0 2px 10px rgba(0,0,0, 0.13);
+}
+
+.page-header__container {
+  margin: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.view {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+}
+
+.view__item {
+  margin-left: 10px;
+}
+
+.posts__container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: yellow;
+  display: flex;
+}
+
+.posts__feed {
+  padding-top: 100px;
+  width: 80%;
+  margin-left: 0;
+}
+
+.posts__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.posts__button {
+  width: 100%;
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 16px;
+  border: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.posts__button:hover {
+  background-color: black;
+  color: white;
+  opacity: 0.6;
+}
+
+.post {
+  position: relative;
+  padding-left: 440px; 
+  min-height: 200px;
+  background: white;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  border-radius: 0 10px 10px 0;
+}
+
+.post__title {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+  padding: 30px 20px 0;
+}
+
+.post__img {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 400px;
+  height: 200px;
+}
+
+.post__controls {
+  position: absolute;
+  content: "";
+  top: 33px;
+  right: 20px;
+}
+
+.post__description {
+  padding: 30px 20px 0;
+}
+
+.post__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post__date {
+  padding: 30px 20px 0;
+}
+
+.post__link {
+  display: block;
+  text-decoration: none;
+  width: 140px;
+  text-align: center;
+  margin: 20px;
+}
+
+.posts__filter {
+  padding-top: 110px;
+  width: 20%;
+}
+
+.filter-form {
+  position: fixed;
+}
+
+.filter-form__published {
+  border: none;
+  padding-top: 20px;
+}
+
+.filter-form__title {
+  font-size: 20px;
+}
+
+.filter-form__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.filter-form__item {
+  margin-bottom: 20px;
+}
+
+.filter-form__item:last-child {
+  margin-bottom: 0;
+}
+
+.filter-form__label {
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.filter-form__label::before {
+  position: absolute;
+  font-family: FontAwesome;
+  content: "\f096";
+  left: 0;
+  top: -2px;
+}
+
+.filter-form__input:checked + .filter-form__label::after {
+  position: absolute;
+  font-family: FontAwesome;
+  content: "\f14a";
+  left: 0;
+  top: -2px;
+}
+
+.filter-form__reset {
+  font-family: 'Roboto', 'Arial', sans-serif;
+  font-size: 16px;
+  margin-left: 10px;
+  border: none;
+}
+
+.filter-form__reset:hover {
+  background-color: black;
+  color: white;
+  opacity: 0.6;
+}
