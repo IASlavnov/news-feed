@@ -132,6 +132,74 @@ body {
   padding: 0;
 }
 
+.posts__list--list .post {
+  padding-left: 440px; 
+  min-height: 200px;
+  background: white;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  border-radius: 0 10px 10px 0;
+}
+
+.posts__list--grid-2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.posts__list--grid-2 .post {
+  width: 49%;
+  min-height: 200px;
+  background: white;
+  padding-left: 0;
+  border: 2px solid black;
+}
+
+.posts__list--grid-2 .post:nth-child(n + 1) {
+  border-radius: 0 10px 10px 0;
+}
+
+.posts__list--grid-2 .post:nth-child(2n) {
+  border-radius: 10px 0 0 10px;
+}
+
+.posts__list--grid-2 .post__img {
+  position: relative;
+  width: calc(100% - 40px);
+  left: 20px;
+  top: 120px;
+}
+
+.posts__list--grid-3 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.posts__list--grid-3 .post {
+  width: 32%;
+  min-height: 200px;
+  background: white;
+  padding-left: 0;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.posts__list--grid-3 .post:nth-child(3n + 1) {
+  border-radius: 0 10px 10px 0;
+}
+
+.posts__list--grid-3 .post:nth-child(3n + 3) {
+  border-radius: 10px 0 0 10px;
+}
+
+.posts__list--grid-3 .post__img {
+  position: relative;
+  width: calc(100% - 40px);
+  left: 20px;
+  top: 120px;
+}
+
 .posts__button {
   width: 100%;
   font-family: 'Roboto', 'Arial', sans-serif;
@@ -149,15 +217,10 @@ body {
 
 .post {
   position: relative;
-  padding-left: 440px; 
-  min-height: 200px;
-  background: white;
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
-  border-radius: 0 10px 10px 0;
 }
 
 .post__title {
+  max-width: 75%;
   font-size: 30px;
   font-weight: 700;
   margin: 0;
@@ -204,6 +267,7 @@ body {
 .posts__filter {
   padding-top: 110px;
   width: 20%;
+  box-shadow: 0 2px 10px rgba(0,0,0, 0.5);
 }
 
 .filter-form {
