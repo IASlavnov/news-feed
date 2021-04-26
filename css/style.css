@@ -74,6 +74,9 @@ body {
 }
 
 .button-up {
+  padding-left: 20px;
+  text-decoration: none;
+  color: black;
   position: fixed;
   top: 345px;
 }
