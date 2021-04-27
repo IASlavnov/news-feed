@@ -2,7 +2,6 @@
   background-color: white;
   max-width: 1400px;
   min-width: 320px;
-  /* min-width: 1000px; */
   width: 100%;
   margin: 0 auto;
   font-family: 'Roboto', 'Arial', sans-serif;
@@ -42,6 +41,7 @@ body {
     7px 7px 20px 0px rgba(0,0,0,.1),
     4px 4px 5px 0px rgba(0,0,0,.1);
   outline: none;
+  font-size: 14px;
 }
 
 .button:before {
@@ -140,7 +140,6 @@ body {
 
 .posts__feed {
   padding-top: 100px;
-  /* ИЗМЕНИЛ С 80% */
   width: 100%;
   min-height: 100vh;
   margin-left: 0;
@@ -153,13 +152,9 @@ body {
 }
 
 .posts__list--list .post {
-  /* padding-left: 440px;  */
   min-height: 200px;
   background: white;
-  /* border-right: 2px solid black;
-  border-bottom: 2px solid black; */
   border: 2px solid black;
-  /* border-radius: 0 10px 10px 0; */
   border-radius: 10px;
 }
 
@@ -267,11 +262,6 @@ body {
 }
 
 .post__img {
-  /* position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%); */
-  /* width: 400px; */
   padding: 20px;
   display: block;
   margin: 0 auto;
@@ -308,7 +298,7 @@ body {
 }
 
 .posts__filter { 
-  padding-top: 110px;
+  padding-top: 100px;
   right: 0;
   width: 20%;
   box-shadow: 0 2px 10px rgba(0,0,0, 0.5);
@@ -319,10 +309,6 @@ body {
   background: yellow;
   height: 300px;
 }
-
-/* .filter-form {
-  position: fixed;
-} */
 
 .filter-form__published {
   border: none;
@@ -387,13 +373,28 @@ body {
 }
 
 @media (max-width: 767px) {
+  .posts__container {
+    flex-direction: column-reverse;
+  }
+
+  .posts__filter {
+    width: 100%;
+  }
+
+  .posts__filter-container {
+    width: 100%;
+  }
+  
   .posts__filter--closed {
-    width: 0;
-    display: hidden;
+    display: none;
   }
 }
 
 @media (min-width: 768px) {
+  .button {
+    font-size: 16px;
+  }
+
   .page-header__filters {
     display: none;
   }
@@ -438,32 +439,3 @@ body {
     height: 200px;
   }
 }
-
-/* @media (max-width: 1100px) {
-  .view__button--grid-large {
-    display: none;
-  }
-
-  .view__button--grid-small {
-    display: none;
-  }
-
-  .posts__list--list .post {
-    padding-left: 20px;
-  }
-
-  .post__img-link {
-    display: block;
-    margin: 0 auto;
-  } 
-
-.post__img {
-    position: relative;
-    margin-top: 20px;
-    left: 20px;
-    top: 200px;
-    margin: 0 auto; 
-    width: calc((100% - 40px) / 1.5);
-    height: 300px;
-  } 
-} */
