@@ -1,5 +1,11 @@
+const filtersButton = document.querySelector('.page-header__filters');
 const viewList = document.querySelector('.view');
 const postsList = document.querySelector('.posts__list');
+const filtersList = document.querySelector('.posts__filter');
+
+filtersButton.addEventListener('click', () => {
+  filtersList.classList.toggle('posts__filter--closed');
+});
 
 viewList.addEventListener('click', (evt) => {
   console.log(evt.target.parentElement);
