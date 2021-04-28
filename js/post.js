@@ -1,13 +1,5 @@
-import {createElement} from './util.js';
-
-const getDate = (publishedAt) => {
-  const date = new Date(Date.parse(publishedAt));
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const hours = date.getHours();
-  const seconds = date.getSeconds();
-  return `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${date.getFullYear()} ${hours < 10 ? '0' + hours : hours}:${seconds < 10 ? '0' + seconds : seconds}`;
-};
+import {getDate} from './util.js';
+import Abstract from './abstract.js';
 
 const createPostTemplate = (article) => {
   const {title, description, publishedAt, url, urlToImage} = article;
@@ -29,25 +21,55 @@ const createPostTemplate = (article) => {
   </li>`;
 };
 
-export default class Post {
+export default class Post extends Abstract {
   constructor(article) {
+    super();
     this._article = article;
-    this._element = null;
+    this._clickWatchedHandler = this._clickWatchedHandler.bind(this);
+    this._clickDeleteHandler = this._clickDeleteHandler.bind(this);
+    this._clickImgLinkHandler = this._clickImgLinkHandler.bind(this);
+    this._clickReadMoreHandler = this._clickReadMoreHandler.bind(this);
   }
 
   getTemplate() {
     return createPostTemplate(this._article);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  _clickWatchedHandler(evt) {
+    evt.preventDefault();
+    this._callback.clickWatched();
   }
 
-  removeElement() {
-    this._element = null;
+  _clickDeleteHandler(evt) {
+    evt.preventDefault();
+    this._callback.clickDelete();
+  }
+
+  _clickImgLinkHandler() {
+    this._callback.clickImgLink();
+  }
+
+  _clickReadMoreHandler() {
+    this._callback.clickReadMore();
+  }
+
+  setClickWatchedHandler(callback) {
+    this._callback.clickWatched = callback;
+    this.getElement().querySelector('.post__watched').addEventListener('click', this._clickWatchedHandler);
+  }
+
+  setClickDeleteHandler(callback) {
+    this._callback.clickDelete = callback;
+    this.getElement().querySelector('.post__delete').addEventListener('click', this._clickDeleteHandler);
+  }
+
+  setClickImgLinkHandler(callback) {
+    this._callback.clickImgLink = callback;
+    this.getElement().querySelector('.post__img-link').addEventListener('click', this._clickImgLinkHandler);
+  }
+
+  setClickReadMoreHandler(callback) {
+    this._callback.clickReadMore = callback;
+    this.getElement().querySelector('.post__link').addEventListener('click', this._clickReadMoreHandler);
   }
 }
