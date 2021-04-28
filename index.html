@@ -23,120 +23,48 @@
           <button class="view__button view__button--grid-small button-control" type="button"><i class="fa fa-th fa-2x" aria-label="Показать новости мелкой плиткой"></i></button>
         </li>                   
       </ul>
+      <button class="page-header__filters" type="button" aria-label="Открыть фильтры"><i class="fa fa-filter fa-2x"></i></button>
     </div>
   </header>
   <main class="page-main posts">
     <div class="posts__container">
       <div class="posts__feed">
         <ul class="posts__list posts__list--list">
-          <li class="posts__item post">
-            <h1 class="post__title">Post title</h1>
-            <a class="post__img-link" href="#">
-              <img class="post__img" src="img/cat2.jpg" width="400" height="200" alt="Image for post">
-            </a>
-            <div class="post__controls">
-              <button class="post__watched button-control" type="button"><i class="fa fa-check fa-2x" aria-label="Отметить прочитанным"></i></button>
-              <button class="post__delete button-control" type="button"><i class="fa fa-times fa-2x" aria-label="Удалить пост"></i></button>
-            </div>
-            <p class="post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit voluptatibus quam quibusdam, voluptates modi eum nam nostrum hic unde eos.</p>
-            <div class="post__container">
-              <span class="post__date"><i class="fa fa-calendar" aria-hidden="true"></i> 20.04.2021 16:00</span>
-              <a class="post__link button" href="#">Read more</a>
-            </div>
-          </li>
-          <li class="posts__item post">
-            <h1 class="post__title">Post title</h1>
-            <a class="post__img-link" href="#">
-              <img class="post__img" src="img/cat2.jpg" width="400" height="200" alt="Image for post">
-            </a>
-            <div class="post__controls">
-              <button class="post__watched button-control" type="button"><i class="fa fa-check fa-2x" aria-label="Отметить прочитанным"></i></button>
-              <button class="post__delete button-control" type="button"><i class="fa fa-times fa-2x" aria-label="Удалить пост"></i></button>
-            </div>
-            <p class="post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit voluptatibus quam quibusdam, voluptates modi eum nam nostrum hic unde eos.</p>
-            <div class="post__container">
-              <span class="post__date"><i class="fa fa-calendar" aria-hidden="true"></i> 20.04.2021 16:00</span>
-              <a class="post__link button" href="#">Read more</a>
-            </div>
-          </li>
-          <li class="posts__item post">
-            <h1 class="post__title">Post title</h1>
-            <a class="post__img-link" href="#">
-              <img class="post__img" src="img/cat2.jpg" width="400" height="200" alt="Image for post">
-            </a>
-            <div class="post__controls">
-              <button class="post__watched button-control" type="button"><i class="fa fa-check fa-2x" aria-label="Отметить прочитанным"></i></button>
-              <button class="post__delete button-control" type="button"><i class="fa fa-times fa-2x" aria-label="Удалить пост"></i></button>
-            </div>
-            <p class="post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit voluptatibus quam quibusdam, voluptates modi eum nam nostrum hic unde eos.</p>
-            <div class="post__container">
-              <span class="post__date"><i class="fa fa-calendar" aria-hidden="true"></i> 20.04.2021 16:00</span>
-              <a class="post__link button" href="#">Read more</a>
-            </div>
-          </li>
-          <li class="posts__item post">
-            <h1 class="post__title">Post title</h1>
-            <a class="post__img-link" href="#">
-              <img class="post__img" src="img/cat2.jpg" width="400" height="200" alt="Image for post">
-            </a>
-            <div class="post__controls">
-              <button class="post__watched button-control" type="button"><i class="fa fa-check fa-2x" aria-label="Отметить прочитанным"></i></button>
-              <button class="post__delete button-control" type="button"><i class="fa fa-times fa-2x" aria-label="Удалить пост"></i></button>
-            </div>
-            <p class="post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit voluptatibus quam quibusdam, voluptates modi eum nam nostrum hic unde eos.</p>
-            <div class="post__container">
-              <span class="post__date"><i class="fa fa-calendar" aria-hidden="true"></i> 20.04.2021 16:00</span>
-              <a class="post__link button" href="#">Read more</a>
-            </div>
-          </li>
-          <li class="posts__item post">
-            <h1 class="post__title">Post title</h1>
-            <a class="post__img-link" href="#">
-              <img class="post__img" src="img/cat2.jpg" width="400" height="200" alt="Image for post">
-            </a>
-            <div class="post__controls">
-              <button class="post__watched button-control" type="button"><i class="fa fa-check fa-2x" aria-label="Отметить прочитанным"></i></button>
-              <button class="post__delete button-control" type="button"><i class="fa fa-times fa-2x" aria-label="Удалить пост"></i></button>
-            </div>
-            <p class="post__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit voluptatibus quam quibusdam, voluptates modi eum nam nostrum hic unde eos.</p>
-            <div class="post__container">
-              <span class="post__date"><i class="fa fa-calendar" aria-hidden="true"></i> 20.04.2021 16:00</span>
-              <a class="post__link button" href="#">Read more</a>
-            </div>
-          </li>
         </ul>
-        <button class="posts__button button" type="button">Show More</button>
       </div>
-      <div class="posts__filter">
-        <form class="filter-form">
-          <fieldset class="filter-form__published">
-            <legend class="filter-form__title">Published:</legend>
-            <ul class="filter-form__list">
-              <li class="filter-form__item">
-                <input class="filter-form__input visually-hidden" id="today" name="today" type="checkbox">
-                <label class="filter-form__label" for="today">Today</label>
-              </li>
-              <li class="filter-form__item">
-                <input class="filter-form__input visually-hidden" id="yesterday" name="yesterday" type="checkbox">
-                <label class="filter-form__label" for="yesterday">Yesterday</label>
-              </li>
-              <li class="filter-form__item">
-                <input class="filter-form__input visually-hidden" id="this-week" name="this-week" type="checkbox">
-                <label class="filter-form__label" for="this-week">This week</label>
-              </li>
-              <li class="filter-form__item">
-                <input class="filter-form__input visually-hidden" id="this-month" name="this-month" type="checkbox">
-                <label class="filter-form__label" for="this-month">This month</label>
-              </li>
-            </ul>
-          </fieldset>
-          <button class="filter-form__reset button" type="reset">Reset</button>
-        </form>
-        <button class="button-control button-up" type="button"><i class="fa fa-caret-square-o-up fa-3x" aria-label="Перемотать наверх"></i></button>
+      <div class="posts__filter posts__filter--closed">
+        <div class="posts__filter-container">
+          <form class="filter-form">
+            <fieldset class="filter-form__published">
+              <legend class="filter-form__title">Published:</legend>
+              <ul class="filter-form__list">
+                <li class="filter-form__item">
+                  <input class="filter-form__input visually-hidden" id="today" name="today" type="checkbox">
+                  <label class="filter-form__label" for="today">Today</label>
+                </li>
+                <li class="filter-form__item">
+                  <input class="filter-form__input visually-hidden" id="yesterday" name="yesterday" type="checkbox">
+                  <label class="filter-form__label" for="yesterday">Yesterday</label>
+                </li>
+                <li class="filter-form__item">
+                  <input class="filter-form__input visually-hidden" id="this-week" name="this-week" type="checkbox">
+                  <label class="filter-form__label" for="this-week">This week</label>
+                </li>
+                <li class="filter-form__item">
+                  <input class="filter-form__input visually-hidden" id="this-month" name="this-month" type="checkbox">
+                  <label class="filter-form__label" for="this-month">This month</label>
+                </li>
+              </ul>
+            </fieldset>
+            <button class="filter-form__reset button" type="reset">Reset</button>
+          </form>
+          <a class="button-control button-up" href="#"><i class="fa fa-caret-square-o-up fa-3x" aria-label="Перемотать наверх"></i></a>
+        </div>
       </div>
     </div>
   </main>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="js/main.js" type="module"></script>
 </body>
 </html>
