@@ -439,3 +439,8 @@ body {
     height: 200px;
   }
 }
+
+.search {
+  border: none;
+  margin-bottom: 10px;
+}

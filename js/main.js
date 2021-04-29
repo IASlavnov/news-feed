@@ -1,4 +1,3 @@
-import './layout.js';
 import './scroll-to-top.js';
 import { getData } from './news-api.js';
 import { renderElement, remove } from './util.js';
@@ -10,8 +9,34 @@ import { setFilterObject, setInitialFilterObject, getFilteredData } from './filt
 const NEWS_PER_STEP = 10;
 const postsFeed = document.querySelector('.posts__feed');
 const postsList = new PostsList();
-const filterForm = document.querySelector('.filter-form');
-const resetButton = filterForm.querySelector('.filter-form__reset');
+const form = document.querySelector('.filter-form');
+const filterForm = form.querySelector('.filter-form__published');
+const searchInput = form.querySelector('.search__input');
+const resetButton = form.querySelector('.filter-form__reset');
+const viewList = document.querySelector('.view');
+
+viewList.addEventListener('click', (evt) => {
+  if (evt.target.parentElement.classList.contains('view__button--list')) {
+    if (!postsList.getElement().classList.contains('posts__list--list')) {
+      postsList.getElement().classList.remove('posts__list--grid-small');
+      postsList.getElement().classList.remove('posts__list--grid-large');
+      postsList.getElement().classList.add('posts__list--list');
+    }
+  } else if (evt.target.parentElement.classList.contains('view__button--grid-large')) {
+      if (!postsList.getElement().classList.contains('posts__list--grid-large')) {
+        postsList.getElement().classList.remove('posts__list--list');
+        postsList.getElement().classList.remove('posts__list--grid-small');
+        postsList.getElement().classList.add('posts__list--grid-large');
+        console.log(postsList.getElement());
+      }
+  } else if (evt.target.parentElement.classList.contains('view__button--grid-small')) {
+      if (!postsList.getElement().classList.contains('posts__list--grid-small')) {
+        postsList.getElement().classList.remove('posts__list--list');
+        postsList.getElement().classList.remove('posts__list--grid-large');
+        postsList.getElement().classList.add('posts__list--grid-small');
+      }
+  }
+});
 
 const renderPost = (article) => {
   const post = new Post(article);
@@ -76,9 +101,18 @@ getData()
     });
 
     resetButton.addEventListener('click', () => {
-      filterForm.reset();
+      form.reset();
       setInitialFilterObject();
       renderContent(articles);
+    });
+
+    searchInput.addEventListener('input', (evt) => {
+      evt.preventDefault();
+      const copiedArticles = articles.slice().filter((article) => {
+        return article.title.toLowerCase().includes(evt.target.value.toLowerCase()) ||
+          article.description.toLowerCase().includes(evt.target.value.toLowerCase());
+      });
+      renderContent(copiedArticles);
     });
   })
   .catch((err) => console.log(err));
