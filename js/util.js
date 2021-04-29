@@ -16,6 +16,10 @@ export const createElement = (template) => {
 };
 
 export const renderElement = (container, element) => {
+  if (container instanceof Abstract) {
+    container = container.getElement();
+  }
+  
   if (element instanceof Abstract) {
     element = element.getElement();
   }

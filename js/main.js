@@ -4,11 +4,12 @@ import { getData } from './news-api.js';
 import { renderElement, remove } from './util.js';
 import Post from './post.js';
 import ShowMore from './show-more.js';
-import { setFilterObject } from './filter.js';
+import PostsList from './posts-list.js';
+import { setFilterObject, getFilteredData } from './filter.js';
 
 const NEWS_PER_STEP = 10;
 const postsFeed = document.querySelector('.posts__feed');
-const postsList = postsFeed.querySelector('.posts__list');
+const postsList = new PostsList();
 // asddddddddddddddddd
 const filterForm = document.querySelector('.filter-form');
 
@@ -35,6 +36,10 @@ const renderPost = (article) => {
 }
 
 const renderContent = (articles) => {
+  postsList.getElement().innerHTML = '';
+  postsFeed.innerHTML = '';
+  renderElement(postsFeed, postsList);
+
   let renderedNewsCount = 0;
   articles
     .slice(renderedNewsCount, NEWS_PER_STEP)
@@ -45,6 +50,7 @@ const renderContent = (articles) => {
     const showMoreButton = new ShowMore();
     renderElement(postsFeed, showMoreButton);
 
+    
     showMoreButton.setClickHandler(() => {
       articles
         .slice(renderedNewsCount, renderedNewsCount + NEWS_PER_STEP)
@@ -61,25 +67,12 @@ const renderContent = (articles) => {
 getData()
   .then((data) => {
     const { articles } = data;
-    console.log(articles);
     renderContent(articles);
 
     filterForm.addEventListener('change', (evt) => {
-      const obj = setFilterObject(evt);
-      console.log('asdasfda', obj[evt.target.value]); 
+      setFilterObject(evt);
+      const filteredArticles = articles.slice().filter((article) => getFilteredData(article));
+      renderContent(filteredArticles);
     });
-
-    // filterForm.addEventListener('change', (evt) => {
-    //   const choosenDate = getDateForFilter(evt);
-    //   console.log(choosenDate);
-    //   console.log(articles[0].publishedAt);
-    //   const filteredArticles = articles
-    //     .slice()
-    //     .filter((article) => {
-    //       const date = new Date(Date.parse(article.publishedAt));
-    //       console.log(date);
-    //     });
-    //   console.log(filteredArticles);
-    // });
   })
   .catch((err) => console.log(err));

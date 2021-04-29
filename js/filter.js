@@ -1,4 +1,4 @@
-const filterForm = document.querySelector('.filter-form');
+const todayDate = new Date();
 
 const filterObject = {
   today: false,
@@ -14,48 +14,43 @@ export const setFilterObject = (evt) => {
       break;
     case 'thisMonth': filterObject.thisMonth = !filterObject.thisMonth;
   }
-
-  return filterObject;
 };
 
-// const choosenDate = [];
-// const date = new Date();
+const filterToday = (articleDate) => {
+  if (filterObject.today) {
+    return articleDate.getDate() === todayDate.getDate();
+  }
+  return true;
+};
 
-// const DateValues = {
-//   'today': date.getDate(),
-//   'yesterday': date.getDate() - 1,
-//   'thismonth': date.getMonth() + 1,
-// };
+const filterYesterday = (articleDate) => {
+  if (filterObject.yesterday) {
+    return articleDate.getDate() === todayDate.getDate() - 1;
+  }
+  return true;
+};
 
-// export const getDateForFilter = (evt) => {
-//   if (choosenDate.includes(DateValues[evt.target.value])) {
-//     let index = choosenDate.findIndex(value => value === DateValues[evt.target.value]);
-//     choosenDate.splice(index, 1);
-//   } else {
-//     choosenDate.push(DateValues[evt.target.value]);
-//   }
+const filterThisMonth = (articleDate) => {
+  if (filterObject.thisMonth) {
+    return articleDate.getMonth() === todayDate.getMonth();
+  }
+  return true;
+}
 
-//   return choosenDate;
-// };
+export const getFilteredData = (article) => {
+  const articleDate = new Date(Date.parse(article.publishedAt));
 
-// filterForm.addEventListener('change', (evt) => {
-//   if (evt.target.checked) {
-//     const x = new Date();
-//     switch(evt.target.value) {
-//       case 'today': console.log('TODAY');
-//         console.log(x.getDate());
-//         break;
-//       case 'yesterday': console.log('YESTERDAY');
-//         console.log(x.getDate() - 1);
-//         break;
-//       case 'thismonth': console.log('THIS MONTH');
-//         console.log(x.getMonth() + 1);
-//         break;
-//     }
-//   }
-// });
-
-// filterForm.addEventListener('change', (evt) => {
-//   const choosenDate = getDateForFilter(evt);
-//   console.log(choosenDate);
-// });
+  if ((filterObject.today && !filterObject.yesterday && !filterObject.thisMonth) ||
+    (!filterObject.today && filterObject.yesterday && !filterObject.thisMonth) ||
+    (!filterObject.thisMonth && !filterObject.yesterday && filterObject.thisMonth)) {
+      return filterToday(articleDate) && filterYesterday(articleDate) && filterThisMonth(articleDate);
+  } else if (filterObject.today && filterObject.yesterday) {
+    return filterToday(articleDate) || filterYesterday(articleDate);
+  } else if (filterObject.today && filterObject.thisMonth) {
+    return filterToday(articleDate) || filterThisMonth(articleDate);
+  } else if (filterObject.yesterday && filterObject.thisMonth) {
+    return filterYesterday(articleDate) || filterThisMonth(articleDate);
+  } else {
+    return filterToday(articleDate) && filterYesterday(articleDate) && filterThisMonth(articleDate);
+  }
+};
