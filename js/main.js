@@ -110,7 +110,7 @@ getData()
       evt.preventDefault();
       const copiedArticles = articles.slice().filter((article) => {
         return article.title.toLowerCase().includes(evt.target.value.toLowerCase()) ||
-          article.description.toLowerCase().includes(evt.target.value.toLowerCase());
+          article.description?.toLowerCase().includes(evt.target.value.toLowerCase());
       });
       renderContent(copiedArticles);
     });
