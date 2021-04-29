@@ -6,6 +6,12 @@ const filterObject = {
   thisMonth: false,
 };
 
+export const setInitialFilterObject = () => {
+  for (let filterVariable in filterObject) {
+    filterObject[filterVariable] = false;
+  }
+};
+
 export const setFilterObject = (evt) => {
   switch (evt.target.value) {
     case 'today': filterObject.today = !filterObject.today;

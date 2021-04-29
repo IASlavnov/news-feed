@@ -5,13 +5,13 @@ import { renderElement, remove } from './util.js';
 import Post from './post.js';
 import ShowMore from './show-more.js';
 import PostsList from './posts-list.js';
-import { setFilterObject, getFilteredData } from './filter.js';
+import { setFilterObject, setInitialFilterObject, getFilteredData } from './filter.js';
 
 const NEWS_PER_STEP = 10;
 const postsFeed = document.querySelector('.posts__feed');
 const postsList = new PostsList();
-// asddddddddddddddddd
 const filterForm = document.querySelector('.filter-form');
+const resetButton = filterForm.querySelector('.filter-form__reset');
 
 const renderPost = (article) => {
   const post = new Post(article);
@@ -73,6 +73,12 @@ getData()
       setFilterObject(evt);
       const filteredArticles = articles.slice().filter((article) => getFilteredData(article));
       renderContent(filteredArticles);
+    });
+
+    resetButton.addEventListener('click', () => {
+      filterForm.reset();
+      setInitialFilterObject();
+      renderContent(articles);
     });
   })
   .catch((err) => console.log(err));
