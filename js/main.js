@@ -8,12 +8,18 @@ import { setFilterObject, setInitialFilterObject, getFilteredData } from './filt
 
 const NEWS_PER_STEP = 10;
 const postsFeed = document.querySelector('.posts__feed');
+const filtersList = document.querySelector('.posts__filter');
 const postsList = new PostsList();
 const form = document.querySelector('.filter-form');
 const filterForm = form.querySelector('.filter-form__published');
 const searchInput = form.querySelector('.search__input');
 const resetButton = form.querySelector('.filter-form__reset');
 const viewList = document.querySelector('.view');
+const filtersButton = document.querySelector('.page-header__filters');
+
+filtersButton.addEventListener('click', () => {
+  filtersList.classList.toggle('posts__filter--closed');
+});
 
 viewList.addEventListener('click', (evt) => {
   if (evt.target.parentElement.classList.contains('view__button--list')) {
