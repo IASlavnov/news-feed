@@ -11,8 +11,6 @@ const postsFeed = document.querySelector('.posts__feed');
 const filtersList = document.querySelector('.posts__filter');
 const postsList = new PostsList();
 const form = document.querySelector('.filter-form');
-const filterForm = form.querySelector('.filter-form__published');
-const searchInput = form.querySelector('.search__input');
 const resetButton = form.querySelector('.filter-form__reset');
 const viewList = document.querySelector('.view');
 const filtersButton = document.querySelector('.page-header__filters');
@@ -100,7 +98,7 @@ getData()
     const { articles } = data;
     renderContent(articles);
 
-    filterForm.addEventListener('change', (evt) => {
+    form.addEventListener('change', (evt) => {
       setFilterObject(evt);
       const filteredArticles = articles.slice().filter((article) => getFilteredData(article));
       renderContent(filteredArticles);
@@ -112,7 +110,7 @@ getData()
       renderContent(articles);
     });
 
-    searchInput.addEventListener('input', (evt) => {
+    form.addEventListener('input', (evt) => {
       evt.preventDefault();
       const copiedArticles = articles.slice().filter((article) => {
         return article.title.toLowerCase().includes(evt.target.value.toLowerCase()) ||
