@@ -1,29 +1,59 @@
-import './layout.js';
 import './scroll-to-top.js';
 import { getData } from './news-api.js';
-import { renderElement } from './util.js';
+import { renderElement, remove } from './util.js';
 import Post from './post.js';
 import ShowMore from './show-more.js';
+import PostsList from './posts-list.js';
+import { setFilterObject, setInitialFilterObject, getFilteredData } from './filter.js';
 
 const NEWS_PER_STEP = 10;
 const postsFeed = document.querySelector('.posts__feed');
-const postsList = postsFeed.querySelector('.posts__list');
+const postsList = new PostsList();
+const form = document.querySelector('.filter-form');
+const filterForm = form.querySelector('.filter-form__published');
+const searchInput = form.querySelector('.search__input');
+const resetButton = form.querySelector('.filter-form__reset');
+const viewList = document.querySelector('.view');
+
+viewList.addEventListener('click', (evt) => {
+  if (evt.target.parentElement.classList.contains('view__button--list')) {
+    if (!postsList.getElement().classList.contains('posts__list--list')) {
+      postsList.getElement().classList.remove('posts__list--grid-small');
+      postsList.getElement().classList.remove('posts__list--grid-large');
+      postsList.getElement().classList.add('posts__list--list');
+    }
+  } else if (evt.target.parentElement.classList.contains('view__button--grid-large')) {
+      if (!postsList.getElement().classList.contains('posts__list--grid-large')) {
+        postsList.getElement().classList.remove('posts__list--list');
+        postsList.getElement().classList.remove('posts__list--grid-small');
+        postsList.getElement().classList.add('posts__list--grid-large');
+        console.log(postsList.getElement());
+      }
+  } else if (evt.target.parentElement.classList.contains('view__button--grid-small')) {
+      if (!postsList.getElement().classList.contains('posts__list--grid-small')) {
+        postsList.getElement().classList.remove('posts__list--list');
+        postsList.getElement().classList.remove('posts__list--grid-large');
+        postsList.getElement().classList.add('posts__list--grid-small');
+      }
+  }
+});
 
 const renderPost = (article) => {
   const post = new Post(article);
-  renderElement(postsList, post.getElement());
-  post.getElement().querySelector('.post__watched').addEventListener('click', () => {
+  renderElement(postsList, post);
+
+  post.setClickWatchedHandler(() => {
     post.getElement().classList.toggle('post--read');
   });
-  post.getElement().querySelector('.post__delete').addEventListener('click', () => {
-    post.getElement().remove();
+  post.setClickDeleteHandler(() => {
+    remove(post);
   });
-  post.getElement().querySelector('.post__img-link').addEventListener('click', () => {
+  post.setClickImgLinkHandler(() => {
     if (!post.getElement().classList.contains('post--read')) {
       post.getElement().classList.add('post--read');
     }
   });
-  post.getElement().querySelector('.post__link').addEventListener('click', () => {
+  post.setClickReadMoreHandler(() => {
     if (!post.getElement().classList.contains('post--read')) {
       post.getElement().classList.add('post--read');
     }
@@ -31,6 +61,10 @@ const renderPost = (article) => {
 }
 
 const renderContent = (articles) => {
+  postsList.getElement().innerHTML = '';
+  postsFeed.innerHTML = '';
+  renderElement(postsFeed, postsList);
+
   let renderedNewsCount = 0;
   articles
     .slice(renderedNewsCount, NEWS_PER_STEP)
@@ -38,17 +72,18 @@ const renderContent = (articles) => {
   renderedNewsCount += NEWS_PER_STEP;
 
   if (articles.length > NEWS_PER_STEP) {
-    renderElement(postsFeed, new ShowMore().getElement());
-    const showMoreButton = postsFeed.querySelector('.posts__button');
+    const showMoreButton = new ShowMore();
+    renderElement(postsFeed, showMoreButton);
 
-    showMoreButton.addEventListener('click', () => {
+    
+    showMoreButton.setClickHandler(() => {
       articles
         .slice(renderedNewsCount, renderedNewsCount + NEWS_PER_STEP)
         .forEach((article) => renderPost(article));
       renderedNewsCount += NEWS_PER_STEP;
 
       if (renderedNewsCount >= articles.length) {
-        showMoreButton.remove();
+        remove(showMoreButton);
       }
     });
   }
@@ -58,5 +93,26 @@ getData()
   .then((data) => {
     const { articles } = data;
     renderContent(articles);
+
+    filterForm.addEventListener('change', (evt) => {
+      setFilterObject(evt);
+      const filteredArticles = articles.slice().filter((article) => getFilteredData(article));
+      renderContent(filteredArticles);
+    });
+
+    resetButton.addEventListener('click', () => {
+      form.reset();
+      setInitialFilterObject();
+      renderContent(articles);
+    });
+
+    searchInput.addEventListener('input', (evt) => {
+      evt.preventDefault();
+      const copiedArticles = articles.slice().filter((article) => {
+        return article.title.toLowerCase().includes(evt.target.value.toLowerCase()) ||
+          article.description?.toLowerCase().includes(evt.target.value.toLowerCase());
+      });
+      renderContent(copiedArticles);
+    });
   })
   .catch((err) => console.log(err));
